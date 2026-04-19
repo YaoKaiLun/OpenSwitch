@@ -3,6 +3,11 @@
 OpenSwitch 是一个面向 macOS 的文件默认打开方式管理工具。  
 目标是将「逐个扩展名手动设置默认应用」变成「按规则一键切换」。
 
+![OpenSwitch 预设详情页](docs/screenshots/preset-detail.png)
+
+> 把一组扩展名（如前端的 `.js .ts .tsx .jsx .css .scss .json`）打包成预设，  
+> 一键切到 Cursor、VSCode 或任何你喜欢的编辑器，告别系统设置里一个个改。
+
 ## 项目目标
 
 - 快速为单个文件扩展名切换默认打开应用
