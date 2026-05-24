@@ -61,3 +61,17 @@
 - 错误处理：补充 OSStatus 到可读文案的映射表
 - 性能：批量设置时增加并发与进度反馈
 - 测试：为 ViewModel、PresetStore 增加单元测试
+
+## 5. 打包与分发
+
+OpenSwitch 使用 Swift Package Manager 编译，通过 `Scripts/build.sh` 手动组装 `.app` bundle：
+
+1. `swift build -c release` 生成可执行文件
+2. `Scripts/create-icons-simple.py` 生成各尺寸 PNG
+3. `iconutil` 将 PNG 编译为 `Contents/Resources/AppIcon.icns`
+4. `Info.plist` 中 `CFBundleIconFile` 指向 `AppIcon`
+5. `codesign` 对 bundle 做 ad-hoc 签名（含 hardened runtime 与 entitlements）
+
+`Scripts/package.sh` 在此基础上生成 DMG，并附带 `Install OpenSwitch.command` 安装脚本，用于复制到 `/Applications` 并移除下载隔离属性（quarantine）。
+
+> 未做 Apple 公证的 DMG 在首次打开时，macOS 可能提示「应用已损坏」。这是 Gatekeeper 对带 quarantine 标记的未公证应用的常见拦截，并非二进制损坏。执行 `xattr -cr /Applications/OpenSwitch.app` 或使用 DMG 内安装脚本即可。

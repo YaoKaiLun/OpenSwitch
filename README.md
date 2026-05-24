@@ -49,6 +49,27 @@ swift test            # 运行单元测试
 
 > 系统要求：macOS 13 及以上，Swift 6.1（Xcode 16+）。
 
+## 安装（Release DMG）
+
+从 [Releases](https://github.com/YaoKaiLun/OpenSwitch/releases) 下载 DMG 后：
+
+1. 打开 DMG，**双击 `Install OpenSwitch.command`**（推荐，会自动复制到「应用程序」并移除隔离标记）
+2. 或手动将 `OpenSwitch.app` 拖入「应用程序」文件夹，然后在终端执行：
+
+```bash
+xattr -cr /Applications/OpenSwitch.app
+```
+
+> macOS 从浏览器下载的应用会附带隔离属性（quarantine）。未做 Apple 公证的开源应用可能提示「已损坏，无法打开」，执行上述步骤即可正常启动。
+
+## 从源码打包
+
+```bash
+pip install Pillow          # 首次生成图标时需要
+./Scripts/build.sh          # 构建 OpenSwitch.app
+./Scripts/package.sh        # 打包为 DMG
+```
+
 ## 目录结构
 
 ```text

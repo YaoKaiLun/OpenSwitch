@@ -80,18 +80,18 @@ def main():
     )
     os.makedirs(app_icon_dir, exist_ok=True)
     
-    # Generate all sizes
+    # Generate all sizes (must match AppIcon.appiconset/Contents.json)
     icons = [
         (16, 'icon_16.png'),
+        (32, 'icon_16@2x.png'),
         (32, 'icon_32.png'),
-        (64, 'icon_16@2x.png'),
+        (64, 'icon_32@2x.png'),
         (128, 'icon_128.png'),
         (256, 'icon_128@2x.png'),
         (256, 'icon_256.png'),
         (512, 'icon_256@2x.png'),
         (512, 'icon_512.png'),
         (1024, 'icon_512@2x.png'),
-        (1024, 'icon_1024.png'),
     ]
     
     for size, filename in icons:
