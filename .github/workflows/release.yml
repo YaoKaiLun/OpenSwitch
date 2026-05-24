@@ -18,6 +18,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install Pillow
+
+      - name: Generate Icons
+        run: python3 Scripts/create-icons-simple.py
+
       - name: Build App
         run: |
           chmod +x Scripts/*.sh

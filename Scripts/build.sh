@@ -32,14 +32,14 @@ cp ".build/release/$APP_NAME" "$APP_PATH/Contents/MacOS/"
 # Copy Info.plist
 cp "Info.plist" "$APP_PATH/Contents/"
 
+# Generate icons if not exists
+if [ ! -f "Assets.xcassets/AppIcon.appiconset/icon_512@2x.png" ]; then
+    echo "🎨 Generating app icons..."
+    python3 Scripts/create-icons-simple.py
+fi
+
 # Copy assets
 cp -r "Assets.xcassets" "$APP_PATH/Contents/Resources/"
-
-# Update Info.plist with dynamic values
-/usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier $BUNDLE_ID" "$APP_PATH/Contents/Info.plist"
-/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" "$APP_PATH/Contents/Info.plist"
-/usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD_NUMBER" "$APP_PATH/Contents/Info.plist"
-/usr/libexec/PlistBuddy -c "Set :LSMinimumSystemVersion 13.0" "$APP_PATH/Contents/Info.plist"
 
 # Make executable
 chmod +x "$APP_PATH/Contents/MacOS/$APP_NAME"
